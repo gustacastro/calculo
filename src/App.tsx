@@ -9,6 +9,9 @@ function App() {
   const [oddsTime02, setOddsTime02] = useState("");
   const [apostaTime02, setApostaTime02] = useState("");
   const [ganhoTime02, setGanhoTime02] = useState("");
+  const [novaOdds3, setNovaOdds3] = useState("");
+  const [apostaTime03, setApostaTime03] = useState("");
+  const [ganhoTime03, setGanhoTime03] = useState("");
 
   useEffect(() => {
     const resultado = parseFloat(apostaTime01) * parseFloat(oddsTime01);
@@ -21,7 +24,17 @@ function App() {
     setGanhoTime02(resultadoTime2.toFixed(2).toString());
   }, [oddsTime01, apostaTime01]);
 
-  function handleGanhoTime01() {}
+  useEffect(() => {
+    const valorNovaAposta = (
+      (Number(apostaTime01) * Number(oddsTime01)) /
+      Number(novaOdds3)
+    ).toFixed(2);
+
+    setApostaTime03(valorNovaAposta.toString());
+    setGanhoTime03(
+      (Number(apostaTime03) * Number(novaOdds3)).toFixed(2).toString()
+    );
+  }, [novaOdds3, ganhoTime03, apostaTime03]);
 
   return (
     <Container>
@@ -76,6 +89,32 @@ function App() {
           <span>
             Ganho Total
             <h3>{oddsTime01 && apostaTime02 ? ganhoTime02 : "0"}</h3>
+          </span>
+        </Caixa>
+        <Caixa>
+          <h3>Calcular</h3>
+          <span>Odds para calculo</span>
+          <input
+            type="number"
+            value={novaOdds3}
+            onChange={(e) => setNovaOdds3(e.target.value)}
+          />
+          <span>Aposta para recuperar</span>
+          <input type="number" disabled value={apostaTime03} />
+          <span>
+            Aposta <h3>{apostaTime03}</h3>
+          </span>
+          <span>
+            Ganho
+            <h3>
+              {novaOdds3 && apostaTime03
+                ? (Number(ganhoTime03) - Number(apostaTime03)).toFixed(2)
+                : "0"}
+            </h3>
+          </span>
+          <span>
+            Ganho Total
+            <h3>{novaOdds3 && apostaTime03 ? ganhoTime03 : "0"}</h3>
           </span>
         </Caixa>
       </Cima>

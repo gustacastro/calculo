@@ -10,7 +10,7 @@ export const Container = styled.div`
 `;
 export const Cima = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 
   @media (max-width: 728px) {
