@@ -7,15 +7,6 @@ export const Container = styled.div`
   justify-content: center;
   height: 100vh;
   flex-direction: column;
-
-  button {
-    background-color: var(--background);
-    border: 1px solid var(--branco);
-    padding: 0.5rem 1.5rem;
-    border-radius: 0.5rem;
-
-    margin: 1rem;
-  }
 `;
 export const Cima = styled.div`
   display: grid;

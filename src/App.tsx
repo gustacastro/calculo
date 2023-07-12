@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Container, Cima, Caixa } from "./styles";
 
@@ -10,7 +10,7 @@ function App() {
   const [apostaTime02, setApostaTime02] = useState("");
   const [ganhoTime02, setGanhoTime02] = useState("");
 
-  function handleGanhoTime01() {
+  useEffect(() => {
     const resultado = parseFloat(apostaTime01) * parseFloat(oddsTime01);
     const resultadoReal = resultado - parseFloat(apostaTime01);
     const oddsRetorno = resultado / resultadoReal;
@@ -19,7 +19,9 @@ function App() {
     setApostaTime02(resultadoReal.toFixed(2).toString());
     setOddsTime02(oddsRetorno.toFixed(2).toString());
     setGanhoTime02(resultadoTime2.toFixed(2).toString());
-  }
+  }, [oddsTime01, apostaTime01]);
+
+  function handleGanhoTime01() {}
 
   return (
     <Container>
@@ -38,7 +40,21 @@ function App() {
             value={apostaTime01}
             onChange={(e) => setApostaTime01(e.target.value)}
           />
-          <span>Ganho: {ganhoTime01}</span>
+          <span>
+            Aposta <h3>{apostaTime01 ? apostaTime01 : "0"}</h3>
+          </span>
+          <span>
+            Ganho
+            <h3>
+              {oddsTime01 && apostaTime01
+                ? (Number(ganhoTime01) - Number(apostaTime01)).toFixed(2)
+                : "0"}
+            </h3>
+          </span>
+          <span>
+            Ganho Total
+            <h3>{oddsTime01 && apostaTime01 ? ganhoTime01 : "0"}</h3>
+          </span>
         </Caixa>
         <Caixa>
           <h3>Time 02</h3>
@@ -46,10 +62,23 @@ function App() {
           <input type="number" disabled value={oddsTime02} />
           <span>Aposta para recuperar</span>
           <input type="number" disabled value={apostaTime02} />
-          <span>Ganho: {ganhoTime02}</span>
+          <span>
+            Aposta <h3>{apostaTime02}</h3>
+          </span>
+          <span>
+            Ganho
+            <h3>
+              {oddsTime02 && apostaTime02
+                ? (Number(ganhoTime02) - Number(apostaTime02)).toFixed(2)
+                : "0"}
+            </h3>
+          </span>
+          <span>
+            Ganho Total
+            <h3>{oddsTime01 && apostaTime02 ? ganhoTime02 : "0"}</h3>
+          </span>
         </Caixa>
       </Cima>
-      <button onClick={handleGanhoTime01}>Calcular</button>
     </Container>
   );
 }
