@@ -25,6 +25,7 @@ function App() {
     <Container>
       <Cima>
         <Caixa>
+          <h3>Time 01</h3>
           <span>Odds</span>
           <input
             type="number"
@@ -40,9 +41,10 @@ function App() {
           <span>Ganho: {ganhoTime01}</span>
         </Caixa>
         <Caixa>
-          <span>Odds</span>
+          <h3>Time 02</h3>
+          <span>Odds para recuperar</span>
           <input type="number" disabled value={oddsTime02} />
-          <span>Aposta</span>
+          <span>Aposta para recuperar</span>
           <input type="number" disabled value={apostaTime02} />
           <span>Ganho: {ganhoTime02}</span>
         </Caixa>
