@@ -18,8 +18,13 @@ export const Container = styled.div`
   }
 `;
 export const Cima = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+
+  @media (max-width: 728px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export const Caixa = styled.div`
